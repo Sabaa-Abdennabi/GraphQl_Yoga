@@ -15,4 +15,3 @@ mutation {
     job
   }
 }
-hh
