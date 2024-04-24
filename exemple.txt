@@ -1,0 +1,17 @@
+mutation {
+  createCv(input: { name: "sabaa", age: 30, user_id: 1, skills_id: [1], job: "Software Engineer" }) {
+    id
+    name
+    age
+    job
+
+  }
+}
+mutation {
+  updateCv(id: 1, input: { name: "Updated Name", age: 31, user_id: 1, skills_id: [1], job: "Updated Job" }) {
+    id
+    name
+    age
+    job
+  }
+}

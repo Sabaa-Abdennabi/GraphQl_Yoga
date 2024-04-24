@@ -1,0 +1,59 @@
+#tout ce qui est en Get
+
+type Query
+{
+    hello(name: String): String,
+    getAllCvs: [Cv!]!,
+    getAllSkills: [Skill!]!,
+    getCvById(id: Int!): Cv,
+    getAllUsers: [User!]!
+}
+
+type Mutation{
+    createCv(input: AjoutCv!): Cv!,
+    updateCv(id: Int!, input: ModifCv!): Cv!,
+    deleteCv(id: Int!): String!,
+}
+
+type Subscription{
+newCv:Cv!
+}
+input AjoutCv{
+    name: String!
+    age: Int!
+    user_id:Int!
+    skills_id:[Int!]!
+    job: String!
+}
+
+input ModifCv{
+    id: Int
+    name: String
+    age: Int
+    job: String
+}
+type User{
+id: Int!
+name : String!
+email: String!
+role:Role!
+cvs:[Cv!]!
+}
+type Cv{
+    id: Int!
+    name: String!
+    age: Int!
+    user: User!
+    skills:[Skill!]!
+    job: String!
+}
+type Skill{
+    id: Int!
+    designation: String!
+    cvs:[Cv!]!
+}
+
+enum Role{
+    Admin
+    User
+}
