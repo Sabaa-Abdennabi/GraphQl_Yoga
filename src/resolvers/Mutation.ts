@@ -10,9 +10,10 @@ export const Mutation={
           job: args.input.job,
           user_id: args.input.user_id,
           skills_id: args.input.skills_id,
+
         };
         context.db.cvs.push(newCv);
-        context.pubSub.publish("new cv added",{newCv:Cv});
+        context.pubSub.publish("newCv",newCv);
         return newCv;
       },
     /*addUser: (parent,args,context) => {

@@ -12,9 +12,19 @@ export const Query={
     getCvById: (parent, args, context) => {
         return context.db.cvs.find((cv) => cv.id === args.id);
     },
-    getAllUsers: (parent, args, context) => {
-      return context.db.users;}
-}
+    getAllUsers: async (parent, args, context) => {
+      const users = await context.prisma.user.findMany({
+        include: {
+          cvs: {
+            include: {
+              skills: true
+            }
+          }
+        }
+      });
+      return users;
+    }
+};
 
 export const Skill = {
   cvs: (parent, args, context) => {
