@@ -9,8 +9,6 @@ import { PrismaClient } from '@prisma/client'
 
 const pubSub = createPubSub();
 const fs = require("fs");
-
-
 const prisma = new PrismaClient();
 
 // Create the schema with the correct context type
