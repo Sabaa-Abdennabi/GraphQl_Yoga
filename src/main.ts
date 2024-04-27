@@ -11,7 +11,7 @@ const pubSub = createPubSub();
 const fs = require("fs");
 
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 // Create the schema with the correct context type
 export const schema = createSchema({
