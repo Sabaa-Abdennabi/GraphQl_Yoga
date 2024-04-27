@@ -1,20 +1,23 @@
-import { Cv } from "./Query";
 
 export const Mutation={
-
     createCv: (parent, args, context) => {
-        const newCv = {
-          id: context.db.cvs.length + 1,
-          name: args.input.name,
-          age: args.input.age,
-          job: args.input.job,
-          user_id: args.input.user_id,
-          skills_id: args.input.skills_id,
-
-        };
-        context.db.cvs.push(newCv);
-        context.pubSub.publish("newCv",newCv);
-        return newCv;
+        return context.prisma.cv.create({
+            data: {
+                name: args.input.name,
+                age: args.input.age,
+                job: args.input.job,
+                user: {
+                connect: {
+                    id: args.input.user_id,
+                },
+                },
+                skills: {
+                connect: args.input.skills_id.map((id) => ({ id })),
+                },
+            },
+            
+        });
+        
       },
     /*addUser: (parent,args,context) => {
         const newUser = {
@@ -37,13 +40,20 @@ export const Mutation={
         context.db.skills.push(newSkill);
         return newSkill;
     },*/
-    deleteCv: (parent,args,context) => {
-        const cvIndex = context.db.cvs.findIndex((cv) => cv.id === args.id);
+    deleteCv: async(parent,args,context) => {
+        const cvIndex =await  context.prisma.cv.findUnique({
+            where: {
+              id: args.id,
+            }});
         if (cvIndex === -1) {
             throw new Error("Cv not found");
         }
-        const deletedCv = context.db.cvs.splice(cvIndex, 1)[0];
-        return "deleted cv !";
+        await context.prisma.cv.delete({
+            where: {
+              id: args.id,
+            },
+          });
+          return "deleted cv !";
     },
     /*
     deleteUser: (parent,args,context) => {

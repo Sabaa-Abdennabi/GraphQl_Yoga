@@ -1,6 +1,5 @@
 // 1
 import { PrismaClient } from '@prisma/client'
-import { User } from './resolvers/Query';
  
 // 2
 const prisma = new PrismaClient()
@@ -17,6 +16,7 @@ async function main() {
               {
                 name: 'Alice CV',
                 age: 30,
+                job: 'Software Engineer',
                 skills: {
                   create: [
                     {
@@ -42,6 +42,7 @@ async function main() {
               {
                 name: 'sabaa CV',
                 age: 22,
+                job: 'Software Engineer',
                 skills: {
                   create: [
                     {

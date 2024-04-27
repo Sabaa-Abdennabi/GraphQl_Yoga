@@ -1,6 +1,6 @@
 import {  createPubSub, createSchema, createYoga } from "graphql-yoga";
 import { createServer } from "http";
-import { Cv, Query,Skill, User } from "./resolvers/Query";
+import { Query } from "./resolvers/Query";
 import { db } from "./db/database"; // Import db from database.ts
 import { Mutation } from './resolvers/Mutation';
 import path from "path";
@@ -22,9 +22,6 @@ export const schema = createSchema({
 
   resolvers: {
     Query,
-    Skill,
-    Cv,
-    User,
     Mutation,
     Subscription,
   },
